@@ -6,10 +6,6 @@ import (
 )
 
 func main() {
-	os.Setenv("name", "kim")
-
-	fmt.Println(os.Getenv("name"))
-	os.Clearenv()
-	fmt.Println(os.Getenv("name"))
-
+	fs := os.DirFS("/main.go")
+	fmt.Printf("type %T, value %v\n", fs, fs)
 }
