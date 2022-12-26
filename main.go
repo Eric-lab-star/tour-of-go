@@ -3,11 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	primes := []int{2, 3, 5, 7, 9, 11, 13}
+	primes := [4]int{2, 3, 5, 7}
 
-	b := primes[:6]
-	c := primes[2:7]
-	fmt.Println(b, cap(b))
-	fmt.Println(c, cap(c))
+	slice := primes[0:2]
+	// slice2 := primes[0:4]
+	// slice2[3] = 11
+	slice = append(slice, 11, 13)
+	slice[3] = 17
+	fmt.Println(primes)
 
 }
