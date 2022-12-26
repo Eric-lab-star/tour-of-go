@@ -1,18 +1,13 @@
 package main
 
-type student struct {
-	name string
-	age  int
-}
+import "fmt"
 
 func main() {
-	var p *student
-	kim := student{
-		name: "kim",
-		age:  13,
-	}
-	p = &kim
+	primes := []int{2, 3, 5, 7, 9, 11, 13}
 
-	p.name = "Lee"
+	b := primes[:6]
+	c := primes[2:7]
+	fmt.Println(b, cap(b))
+	fmt.Println(c, cap(c))
 
 }
