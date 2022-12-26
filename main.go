@@ -1,22 +1,18 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+type student struct {
+	name string
+	age  int
+}
 
 func main() {
-	wd, err := os.Getwd()
-	if err != nil {
-		panic(err)
+	var p *student
+	kim := student{
+		name: "kim",
+		age:  13,
 	}
-	fs := os.DirFS(wd)
-	fmt.Printf("type %T, value %v\n", fs, fs)
-	file, err := fs.Open("main.go")
-	if err != nil {
-		panic(err)
-	}
-	data := make([]byte, 100)
-	file.Read(data)
-	fmt.Println(string(data))
+	p = &kim
+
+	p.name = "Lee"
+
 }
