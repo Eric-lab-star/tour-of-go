@@ -15,5 +15,4 @@ func main() {
 		last_name:  "Kim",
 	}
 	fmt.Println(m["korean"])
-
 }
