@@ -2,17 +2,21 @@ package main
 
 import "fmt"
 
-type student struct {
-	first_name, last_name string
+// fibonacci is a function that returns
+// a function that returns an int.
+
+func fibonacci() func() int {
+	f2, f1 := 0, 1
+	return func() int {
+		f := f2
+		f2, f1 = f1, f1+f
+		return f
+	}
 }
 
-var m map[string]student
-
 func main() {
-	m = make(map[string]student)
-	m["korean"] = student{
-		first_name: "Kyungsub",
-		last_name:  "Kim",
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
 	}
-	fmt.Println(m["korean"])
 }
