@@ -2,21 +2,28 @@ package main
 
 import "fmt"
 
-// fibonacci is a function that returns
-// a function that returns an int.
+type Vertex struct {
+	X, Y float64
+}
 
-func fibonacci() func() int {
-	f2, f1 := 0, 1
-	return func() int {
-		f := f2
-		f2, f1 = f1, f1+f
-		return f
-	}
+func (v Vertex) add() float64 {
+	return v.X + v.Y
+}
+
+func (v *Vertex) scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func mutate(v *Vertex) {
+	v.X = v.X * 2
+	v.Y = v.Y * 2
 }
 
 func main() {
-	f := fibonacci()
-	for i := 0; i < 10; i++ {
-		fmt.Println(f())
-	}
+	v := Vertex{3, 2}
+	fmt.Println(v)
+	mutate(&v)
+	fmt.Println(v)
+
 }
