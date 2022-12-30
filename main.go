@@ -1,21 +1,26 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func sum(s []int, c chan int) {
-	sum := 0
-	for _, v := range s {
-		sum += v
+func write(ch chan int) {
+	for i := 0; i < 5; i++ {
+		ch <- i
+		fmt.Printf("successfully wrote %d\n", i)
 	}
-	c <- sum
+	close(ch)
+
 }
 
 func main() {
+	ch := make(chan int, 2)
 
-	s := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-	c := make(chan int)
-	go sum(s[:len(s)/2], c)
-	go sum(s[len(s)/2:], c)
-	x, y := <-c, <-c
-	fmt.Println(x, y)
+	go write(ch)
+	time.Sleep(2 * time.Second)
+	for v := range ch {
+		fmt.Printf("read value %v\n", v)
+		time.Sleep(1 * time.Second)
+	}
 }
