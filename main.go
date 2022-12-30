@@ -1,13 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+// List represents a singly-linked list that holds
+// values of any type.
+func Print[T string | int](a []T) {
+	for _, v := range a {
+		fmt.Println(v)
+	}
+}
+
+type Number interface {
+	int
+	float32
+}
 
 func main() {
-	var i interface{}
-
-	i = 10
-	i = "hello"
-
-	fmt.Println(i)
-
+	s := []string{"hello", "hi"}
+	n := []int{1, 2, 3, 4}
+	Print(s)
+	Print(n)
 }
