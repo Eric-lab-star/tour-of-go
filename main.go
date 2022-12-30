@@ -1,25 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-// List represents a singly-linked list that holds
-// values of any type.
-func Print[T string | int](a []T) {
-	for _, v := range a {
-		fmt.Println(v)
+func sum(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
 	}
-}
-
-type Number interface {
-	int
-	float32
+	c <- sum
 }
 
 func main() {
-	s := []string{"hello", "hi"}
-	n := []int{1, 2, 3, 4}
-	Print(s)
-	Print(n)
+
+	s := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	c := make(chan int)
+	go sum(s[:len(s)/2], c)
+	go sum(s[len(s)/2:], c)
+	x, y := <-c, <-c
+	fmt.Println(x, y)
 }
